@@ -8,4 +8,6 @@ public class Messages {
     public static String EMAIL_REQUIRED = "Email is required";
 
     public static String MESSAGE_REQUIRED = "Message is required";
+
+    public static String CONTACT_SUCCESS_MESSAGE = "Thanks {USERNAME}, we appreciate your feedback.";
 }

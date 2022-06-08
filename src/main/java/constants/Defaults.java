@@ -12,7 +12,7 @@ public class Defaults {
 
     public static String DEFAULT_CONFIG_PROPERTIES_PATH = System.getProperty("user.dir") + slash + "src" + slash + "main" + slash + "resources" + slash + "defaultConfig.properties";
 
-    public static int ELEMENT_EXPLICIT_WAIT = 15;
+    public static int ELEMENT_EXPLICIT_WAIT = 20;
 
     public static String SRC = "src";
 
@@ -27,6 +27,8 @@ public class Defaults {
     public static String TEST_FORENAME_KEY = "testForeName";
 
     public static String TEST_EMAIL_KEY = "testEmail";
+
+    public static String USERNAME_REGEX = "{USERNAME}";
 
     public static String TEST_MESSAGE_KEY = "testMessage";
 }

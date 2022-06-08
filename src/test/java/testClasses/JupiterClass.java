@@ -5,6 +5,7 @@ import constants.Defaults;
 import constants.Messages;
 import constants.ProjectPath;
 import lombok.extern.java.Log;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -54,5 +55,16 @@ public class JupiterClass extends BaseClass {
         softAssert.assertFalse(contactPageSteps.isMessageErrorMessageDisplayed());
         softAssert.assertAll();
     }
+
+    @Test(invocationCount = 5)
+    public void verifyContactPageSuccessfulSubmissionMessage() {
+        homePageSteps.navigateToContactPage();
+        //Populate mandatory fields
+        contactPageSteps.fillMandatoryFields(jupiterUser);
+        contactPageSteps.clickSubmitButton();
+        //Verify successful submission message
+        Assert.assertEquals(contactPageSteps.getSuccessMessage(), Messages.CONTACT_SUCCESS_MESSAGE.replace(Defaults.USERNAME_REGEX, jupiterUser.getForeName()));
+    }
+
 
 }
