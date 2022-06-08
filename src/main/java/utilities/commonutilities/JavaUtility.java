@@ -11,4 +11,8 @@ public class JavaUtility {
     public static int convertStringToInteger(String text) {
         return Integer.parseInt(text);
     }
+
+    public static double convertStringToDouble(String text) {
+        return Double.parseDouble(text);
+    }
 }

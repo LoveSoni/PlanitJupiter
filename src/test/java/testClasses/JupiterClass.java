@@ -1,9 +1,15 @@
 package testClasses;
 
+/**
+ * author Love
+ */
+
 import base.BaseClass;
+import com.google.common.collect.Maps;
 import constants.Defaults;
 import constants.InventoryItems;
 import constants.Messages;
+import lombok.extern.java.Log;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,6 +19,7 @@ import testSteps.CartSteps;
 import testSteps.ContactPageSteps;
 import testSteps.HomePageSteps;
 import testSteps.ShopPageSteps;
+import utilities.loggerutilities.LogUtility;
 import utilities.readerutilities.PropertyReader;
 
 import java.util.HashMap;
@@ -92,11 +99,16 @@ public class JupiterClass extends BaseClass {
         itemsListWithQuantity.put(InventoryItems.STUFFED_FROG, 2);
         itemsListWithQuantity.put(InventoryItems.FLUFFY_BUNNY, 5);
         itemsListWithQuantity.put(InventoryItems.VALENTINE_BEAR, 3);
+        Map<InventoryItems, Double> actualItemPrice = shopPageSteps.getItemPrice(itemsListWithQuantity);
         shopPageSteps.addItemsToCart(itemsListWithQuantity);
         //Add items to cart
         shopPageSteps.clickCartButton();
-        //verify price
-        itemsListWithQuantity.forEach((item, count) -> System.out.print(cartSteps.getItemQuantity(item.getItemName())));
+        //verify price of each product
+        Map<InventoryItems, Double> expectedItemPrice = cartSteps.getItemPrice(itemsListWithQuantity);
+        LogUtility.info("Actual Item price : " + actualItemPrice);
+        LogUtility.info("Expected Item price : " + expectedItemPrice);
+        Assert.assertTrue(Maps.difference(actualItemPrice, expectedItemPrice).areEqual());
+        //verify each product subtotal
 
     }
 
