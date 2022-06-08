@@ -30,5 +30,11 @@ public class Defaults {
 
     public static String USERNAME_REGEX = "{USERNAME}";
 
+    public static String GENERIC_LOCATOR_REGEX = "{genericLocatorString}";
+
+    public static String FULL_STOP = ".";
+
+    public static String COLUNS = ":";
+
     public static String TEST_MESSAGE_KEY = "testMessage";
 }

@@ -32,6 +32,12 @@ public class WebLibrary {
         }
     }
 
+    public void multipleClicks(By locator, int numberOfClick) {
+        for (int i = 0; i < numberOfClick; i++) {
+            click(locator);
+        }
+    }
+
     public String getText(By locator) {
         isElementPresent(locator);
         String text = getWebElement(locator).getText();
@@ -79,6 +85,25 @@ public class WebLibrary {
 
     public WebElement getWebElement(By locator) {
         return driver.findElement(locator);
+    }
+
+    public By generateLocator(By locator, String updatedValue) {
+        String locatorString = locator.toString();
+        String locatorStrategy = locatorString.substring(locatorString.indexOf(Defaults.FULL_STOP) + 1, locatorString.indexOf(Defaults.COLUNS)).toLowerCase();
+        String updatedLocatorString = locatorString.substring(locatorString.indexOf(Defaults.COLUNS) + 1, locatorString.length()).trim().replace(Defaults.GENERIC_LOCATOR_REGEX, updatedValue);
+        By element = null;
+        // for now in our framework there are only two locators strategy used
+        switch (locatorStrategy) {
+            case "xpath":
+                element = By.xpath(updatedLocatorString);
+                break;
+            case "id":
+                element = By.id(updatedLocatorString);
+                break;
+            default:
+                LogUtility.error("Locator strategy not defined");
+        }
+        return element;
     }
 
 }
