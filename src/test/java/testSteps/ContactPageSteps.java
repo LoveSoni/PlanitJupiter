@@ -30,7 +30,7 @@ public class ContactPageSteps {
         webLibrary.enterText(forenameInputField, user.getForeName());
     }
 
-    public void fillMandatoryFields(JupiterUser user){
+    public void fillMandatoryFields(JupiterUser user) {
         enterForeName(user);
         enterEmail(user);
         enterMessage(user);
@@ -89,7 +89,7 @@ public class ContactPageSteps {
     }
 
     public String getSuccessMessage() {
-        return webLibrary.getText(successMessage);
+        return webLibrary.getText(successMessage).trim();
     }
 
 }
