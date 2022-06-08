@@ -74,7 +74,7 @@ public class WebLibrary {
             webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             res = true;
         } catch (Exception timeoutException) {
-            LogUtility.warn("Element - " + locator + " is not Visible");
+            LogUtility.info("Element - " + locator + " is not Visible");
         }
         return res;
     }

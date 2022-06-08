@@ -10,8 +10,10 @@ import constants.Defaults;
 import constants.InventoryItems;
 import constants.ItemAmountType;
 import constants.Messages;
+import listeners.ExtentListener;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import requests.JupiterUser;
@@ -29,6 +31,7 @@ import java.util.Properties;
 /**
  * author Love
  */
+@Listeners(ExtentListener.class)
 public class JupiterClass extends BaseClass {
     private HomePageSteps homePageSteps;
     private CartSteps cartSteps;

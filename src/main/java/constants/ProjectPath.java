@@ -24,5 +24,8 @@ public class ProjectPath {
 
     public static String ENVIRONMENT_CONFIG_PATH = MAIN_ENVIRONMENT_PATH + slash + EnvironmentReader.getTestEnvironment() + ".properties";
 
+    public static String EXTENT_REPORT_PATH = PROJECT_ROOT_PATH + slash + "reports" + slash + "extentReport.html";
+
+    public static String EXTENT_CONFIG_XML_PATH = MAIN_RESOURCE_PATH + slash + "extentConfig.xml";
 
 }
