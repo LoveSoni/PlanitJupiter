@@ -3,6 +3,10 @@ This repository contains PlanIt Assessment Automation project which is capable o
  **v1 url:** https://jupiter.cloud.planittesting.com/#/home     
 **v2 url:** https://jupiter2.cloud.planittesting.com/#/
 
+**Installation (pre-requisites)**
+1. JDK 1.8+ (make sure Java class path is set)
+2. Maven (make sure .m2 class path is set)
+
 **Language and Libraries Used**
 * Java8 -> Lamda & streams
 * Testng
@@ -65,6 +69,8 @@ This repository contains PlanIt Assessment Automation project which is capable o
 |
 └── testng.xml
 ```
+**Supported CI/CD:** We can run test cases from any CI/CD tools e.g. Jenkins/TeamCity/Gitlab/BitBucket.                                    
+**Command:** mvn clean test 
 
 # Execution Video
 
