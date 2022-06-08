@@ -5,6 +5,7 @@ package library;
  */
 
 import constants.Defaults;
+import lombok.extern.java.Log;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -43,6 +44,13 @@ public class WebLibrary {
         String text = getWebElement(locator).getText();
         LogUtility.info("Get Text - " + text);
         return text;
+    }
+
+    public String getAttribute(By locator, String attributeName){
+        isElementPresent(locator);
+        String value = getWebElement(locator).getAttribute(attributeName);
+        LogUtility.info("Get Text -"+value);
+        return value;
     }
 
     public void enterText(By locator, String text) {

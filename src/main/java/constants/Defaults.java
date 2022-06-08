@@ -37,4 +37,6 @@ public class Defaults {
     public static String COLUNS = ":";
 
     public static String TEST_MESSAGE_KEY = "testMessage";
+
+    public static String VALUE_KEY = "value";
 }

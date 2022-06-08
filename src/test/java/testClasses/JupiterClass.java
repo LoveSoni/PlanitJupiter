@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import requests.JupiterUser;
+import testSteps.CartSteps;
 import testSteps.ContactPageSteps;
 import testSteps.HomePageSteps;
 import testSteps.ShopPageSteps;
@@ -23,6 +24,7 @@ import java.util.Properties;
  */
 public class JupiterClass extends BaseClass {
     private HomePageSteps homePageSteps;
+    private CartSteps cartSteps;
     private ContactPageSteps contactPageSteps;
     private ShopPageSteps shopPageSteps;
     private JupiterUser jupiterUser = new JupiterUser();
@@ -34,6 +36,7 @@ public class JupiterClass extends BaseClass {
         homePageSteps = new HomePageSteps(sessionManager);
         contactPageSteps = new ContactPageSteps(sessionManager);
         shopPageSteps = new ShopPageSteps(sessionManager);
+        cartSteps = new CartSteps(sessionManager);
         jupiterUser.setForeName(defaultConfigProp.getProperty(Defaults.TEST_FORENAME_KEY));
         jupiterUser.setEmail(defaultConfigProp.getProperty(Defaults.TEST_EMAIL_KEY));
         jupiterUser.setMessage(defaultConfigProp.getProperty(Defaults.TEST_MESSAGE_KEY));
@@ -79,19 +82,22 @@ public class JupiterClass extends BaseClass {
         shopPageSteps.addItemsToCart(itemsListWithQuantity);
         shopPageSteps.clickCartButton();
         //verify items in cart
+        Assert.assertTrue(itemsListWithQuantity.entrySet().stream().allMatch(item -> item.getValue().equals(cartSteps.getItemQuantity(item.getKey().getItemName()))));
     }
 
     @Test
-    public void verifyPriceOfEachProduct(){
+    public void verifyPriceOfEachProduct() {
         homePageSteps.navigateToShopTab();
         Map<InventoryItems, Integer> itemsListWithQuantity = new HashMap();
-        itemsListWithQuantity.put(InventoryItems.STUFFED_FROG,2);
-        itemsListWithQuantity.put(InventoryItems.FLUFFY_BUNNY,5);
-        itemsListWithQuantity.put(InventoryItems.VALENTINE_BEAR,3);
+        itemsListWithQuantity.put(InventoryItems.STUFFED_FROG, 2);
+        itemsListWithQuantity.put(InventoryItems.FLUFFY_BUNNY, 5);
+        itemsListWithQuantity.put(InventoryItems.VALENTINE_BEAR, 3);
         shopPageSteps.addItemsToCart(itemsListWithQuantity);
         //Add items to cart
         shopPageSteps.clickCartButton();
         //verify price
+        itemsListWithQuantity.forEach((item, count) -> System.out.print(cartSteps.getItemQuantity(item.getItemName())));
+
     }
 
 }
