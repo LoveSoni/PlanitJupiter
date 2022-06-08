@@ -10,7 +10,6 @@ import constants.Defaults;
 import constants.InventoryItems;
 import constants.ItemAmountType;
 import constants.Messages;
-import lombok.extern.java.Log;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
