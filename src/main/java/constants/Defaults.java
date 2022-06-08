@@ -32,6 +32,8 @@ public class Defaults {
 
     public static String GENERIC_LOCATOR_REGEX = "{genericLocatorString}";
 
+    public static String INDEX_LOCATOR_REGEX = "{indexLocatorString}";
+
     public static String FULL_STOP = ".";
 
     public static String COLUNS = ":";

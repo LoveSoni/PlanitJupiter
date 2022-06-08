@@ -3,7 +3,6 @@ package testSteps;
 import constants.Defaults;
 import constants.InventoryItems;
 import library.WebLibrary;
-import lombok.extern.java.Log;
 import org.openqa.selenium.By;
 import sessions.uisessions.SessionManager;
 import utilities.commonutilities.JavaUtility;
@@ -18,8 +17,8 @@ import java.util.Map;
 
 public class ShopPageSteps {
     private final By cartButton = By.id("nav-cart");
-    private final By itemBuy = By.xpath("//h4[text()='" + Defaults.GENERIC_LOCATOR_REGEX + "']/../p/a");
-    private final By itemPrice = By.xpath("//h4[text()='" + Defaults.GENERIC_LOCATOR_REGEX + "']/../p/span");
+    private final By itemBuy = By.xpath("//h4[text()='" + Defaults.GENERIC_LOCATOR_REGEX + "']/../p/a[text()='Buy']");
+    private final By itemPrice = By.xpath("//h4[text()='" + Defaults.GENERIC_LOCATOR_REGEX + "']/../p/a[text()='Buy']/preceding-sibling::span");
     private final WebLibrary webLibrary;
 
     public ShopPageSteps(SessionManager sessionManager) {
@@ -28,7 +27,7 @@ public class ShopPageSteps {
 
     public Map<InventoryItems, Double> getItemPrice(Map<InventoryItems, Integer> itemList) {
         Map<InventoryItems, Double> itempriceMap = new HashMap<>();
-        itemList.forEach((item, count) -> itempriceMap.put(item, JavaUtility.convertStringToDouble(webLibrary.getText(webLibrary.generateLocator(itemPrice, item.getItemName())).replace("$", ""))));
+        itemList.forEach((item, count) -> itempriceMap.put(item, JavaUtility.convertStringToDouble(webLibrary.getText(webLibrary.generateLocatorByReplacingString(itemPrice, item.getItemName())).replace("$", ""))));
         return itempriceMap;
     }
 
@@ -40,7 +39,7 @@ public class ShopPageSteps {
 
     public void addItemsToCart(Map<InventoryItems, Integer> items) {
         LogUtility.info("Items to purchase: " + items);
-        items.forEach((key, value) -> webLibrary.multipleClicks(webLibrary.generateLocator(itemBuy, key.getItemName()), value));
+        items.forEach((key, value) -> webLibrary.multipleClicks(webLibrary.generateLocatorByReplacingString(itemBuy, key.getItemName()), value));
     }
 
     public void clickCartButton() {

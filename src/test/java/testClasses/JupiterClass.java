@@ -105,8 +105,8 @@ public class JupiterClass extends BaseClass {
         shopPageSteps.clickCartButton();
         //verify price of each product
         Map<InventoryItems, Double> actualItemPrice = cartSteps.getItemPriceOrSubtotal(itemsListWithQuantity, ItemAmountType.PRICE);
-        LogUtility.info("Actual Item price : " + actualItemPrice);
         LogUtility.info("Expected Item price : " + expectedItemPrice);
+        LogUtility.info("Actual Item price : " + actualItemPrice);
         Assert.assertTrue(Maps.difference(actualItemPrice, expectedItemPrice).areEqual());
         //verify each product subtotal
         Map<InventoryItems, Double> expectedSubTotalAmount = shopPageSteps.getExpectedSubTotalAmount(itemsListWithQuantity, actualItemPrice);

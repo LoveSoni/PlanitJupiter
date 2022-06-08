@@ -5,7 +5,6 @@ package library;
  */
 
 import constants.Defaults;
-import lombok.extern.java.Log;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,6 +12,7 @@ import sessions.uisessions.SessionManager;
 import utilities.loggerutilities.LogUtility;
 
 import java.time.Duration;
+import java.util.List;
 
 public class WebLibrary {
     private WebDriver driver;
@@ -46,10 +46,10 @@ public class WebLibrary {
         return text;
     }
 
-    public String getAttribute(By locator, String attributeName){
+    public String getAttribute(By locator, String attributeName) {
         isElementPresent(locator);
         String value = getWebElement(locator).getAttribute(attributeName);
-        LogUtility.info("Get Text -"+value);
+        LogUtility.info("Get Text -" + value);
         return value;
     }
 
@@ -79,6 +79,13 @@ public class WebLibrary {
         return res;
     }
 
+    public By generateLocatorByReplacingId(By locator, int index) {
+        String locatorString = locator.toString();
+        String locatorStrategy = locatorString.substring(locatorString.indexOf(Defaults.FULL_STOP) + 1, locatorString.indexOf(Defaults.COLUNS)).toLowerCase();
+        String updatedLocatorString = locatorString.substring(locatorString.indexOf(Defaults.COLUNS) + 1).trim().replace(Defaults.INDEX_LOCATOR_REGEX, String.valueOf(index));
+        return generateLocator(locatorStrategy, updatedLocatorString);
+    }
+
     public boolean isElementPresent(By locator) {
         boolean res = false;
         try {
@@ -95,10 +102,19 @@ public class WebLibrary {
         return driver.findElement(locator);
     }
 
-    public By generateLocator(By locator, String updatedValue) {
+    public List<WebElement> getWebElements(By locator) {
+        isElementPresent(locator);
+        return driver.findElements(locator);
+    }
+
+    public By generateLocatorByReplacingString(By locator, String updatedValue) {
         String locatorString = locator.toString();
         String locatorStrategy = locatorString.substring(locatorString.indexOf(Defaults.FULL_STOP) + 1, locatorString.indexOf(Defaults.COLUNS)).toLowerCase();
-        String updatedLocatorString = locatorString.substring(locatorString.indexOf(Defaults.COLUNS) + 1, locatorString.length()).trim().replace(Defaults.GENERIC_LOCATOR_REGEX, updatedValue);
+        String updatedLocatorString = locatorString.substring(locatorString.indexOf(Defaults.COLUNS) + 1).trim().replace(Defaults.GENERIC_LOCATOR_REGEX, updatedValue);
+        return generateLocator(locatorStrategy, updatedLocatorString);
+    }
+
+    public By generateLocator(String locatorStrategy, String updatedLocatorString) {
         By element = null;
         // for now in our framework there are only two locators strategy used
         switch (locatorStrategy) {
