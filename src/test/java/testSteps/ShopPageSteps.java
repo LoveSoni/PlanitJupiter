@@ -32,6 +32,12 @@ public class ShopPageSteps {
         return itempriceMap;
     }
 
+    public Map<InventoryItems, Double> getExpectedSubTotalAmount(Map<InventoryItems, Integer> itemWithCount, Map<InventoryItems, Double> itemWithPrice) {
+        Map<InventoryItems, Double> subTotalMap = new HashMap<>();
+        itemWithCount.forEach((item, count) -> subTotalMap.put(item, itemWithPrice.get(item) * count));
+        return subTotalMap;
+    }
+
     public void addItemsToCart(Map<InventoryItems, Integer> items) {
         LogUtility.info("Items to purchase: " + items);
         items.forEach((key, value) -> webLibrary.multipleClicks(webLibrary.generateLocator(itemBuy, key.getItemName()), value));

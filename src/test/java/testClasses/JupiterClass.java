@@ -8,6 +8,7 @@ import base.BaseClass;
 import com.google.common.collect.Maps;
 import constants.Defaults;
 import constants.InventoryItems;
+import constants.ItemAmountType;
 import constants.Messages;
 import lombok.extern.java.Log;
 import org.testng.Assert;
@@ -99,17 +100,27 @@ public class JupiterClass extends BaseClass {
         itemsListWithQuantity.put(InventoryItems.STUFFED_FROG, 2);
         itemsListWithQuantity.put(InventoryItems.FLUFFY_BUNNY, 5);
         itemsListWithQuantity.put(InventoryItems.VALENTINE_BEAR, 3);
-        Map<InventoryItems, Double> actualItemPrice = shopPageSteps.getItemPrice(itemsListWithQuantity);
+        Map<InventoryItems, Double> expectedItemPrice = shopPageSteps.getItemPrice(itemsListWithQuantity);
         shopPageSteps.addItemsToCart(itemsListWithQuantity);
         //Add items to cart
         shopPageSteps.clickCartButton();
         //verify price of each product
-        Map<InventoryItems, Double> expectedItemPrice = cartSteps.getItemPrice(itemsListWithQuantity);
+        Map<InventoryItems, Double> actualItemPrice = cartSteps.getItemPriceOrSubtotal(itemsListWithQuantity, ItemAmountType.PRICE);
         LogUtility.info("Actual Item price : " + actualItemPrice);
         LogUtility.info("Expected Item price : " + expectedItemPrice);
         Assert.assertTrue(Maps.difference(actualItemPrice, expectedItemPrice).areEqual());
         //verify each product subtotal
-
+        Map<InventoryItems, Double> expectedSubTotalAmount = shopPageSteps.getExpectedSubTotalAmount(itemsListWithQuantity, actualItemPrice);
+        Map<InventoryItems, Double> actualSubTotalAmount = cartSteps.getItemPriceOrSubtotal(itemsListWithQuantity, ItemAmountType.SUBTOTAL);
+        LogUtility.info("Actual Items Subtotal : " + actualSubTotalAmount);
+        LogUtility.info("Expected Items Subtotal : " + expectedSubTotalAmount);
+        Assert.assertTrue(Maps.difference(actualItemPrice, expectedItemPrice).areEqual());
+        //Verify Total price
+        Double expectedTotalPrice = expectedSubTotalAmount.values().stream().mapToDouble(subtotal -> subtotal).sum();
+        Double actualTotalPrice = cartSteps.getTotalPrice();
+        LogUtility.info("Expected Total Price : " + expectedTotalPrice);
+        LogUtility.info("Actual Total Price : " + actualTotalPrice);
+        Assert.assertEquals(expectedItemPrice, actualItemPrice);
     }
 
 }
