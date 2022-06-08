@@ -3,8 +3,6 @@ package testClasses;
 import base.BaseClass;
 import constants.Defaults;
 import constants.Messages;
-import constants.ProjectPath;
-import lombok.extern.java.Log;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,7 +10,6 @@ import org.testng.asserts.SoftAssert;
 import requests.JupiterUser;
 import testSteps.ContactPageSteps;
 import testSteps.HomePageSteps;
-import utilities.loggerutilities.LogUtility;
 import utilities.readerutilities.PropertyReader;
 
 import java.util.Properties;
