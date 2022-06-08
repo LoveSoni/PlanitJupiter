@@ -24,6 +24,8 @@ This repository contains PlanIt Assessment Automation project which is capable o
 # Project Structure
 ```bash
 ├── pom.xml
+├── reports
+│   └── extentReport.html
 ├── src
 │   ├── main
 │   │   ├── java
@@ -38,6 +40,8 @@ This repository contains PlanIt Assessment Automation project which is capable o
 │   │   │   │   └── Urls.java
 │   │   │   ├── library
 │   │   │   │   └── WebLibrary.java
+│   │   │   ├── listeners
+│   │   │   │   └── ExtentListener.java
 │   │   │   ├── requests
 │   │   │   │   └── JupiterUser.java
 │   │   │   ├── sessions
@@ -49,15 +53,19 @@ This repository contains PlanIt Assessment Automation project which is capable o
 │   │   │       │   └── JavaUtility.java
 │   │   │       ├── loggerutilities
 │   │   │       │   └── LogUtility.java
-│   │   │       └── readerutilities
-│   │   │           ├── EnvironmentReader.java
-│   │   │           └── PropertyReader.java
+│   │   │       ├── readerutilities
+│   │   │       │   ├── EnvironmentReader.java
+│   │   │       │   └── PropertyReader.java
+│   │   │       └── reportingUtilities
+│   │   │           ├── ExtentManager.java
+│   │   │           └── ExtentReport.java
 │   │   └── resources
 │   │       ├── defaultConfig.properties
 │   │       ├── environments
 │   │       │   └── prod.properties
+│   │       ├── extentConfig.xml
 │   │       └── log4j2.xml
-│   └──test
+│   └── test
 │       └── java
 │           ├── testClasses
 │           │   └── JupiterClass.java
@@ -66,11 +74,13 @@ This repository contains PlanIt Assessment Automation project which is capable o
 │               ├── ContactPageSteps.java
 │               ├── HomePageSteps.java
 │               └── ShopPageSteps.java
-|
 └── testng.xml
 ```
 **Supported CI/CD:** We can run test cases from any CI/CD tools e.g. Jenkins/TeamCity/Gitlab/BitBucket.                                    
 **Command:** mvn clean test 
+
+# Extent Report
+<img width="1536" alt="Planit_ExtentReport" src="https://user-images.githubusercontent.com/33176624/172675951-8bbc50e2-fe79-493d-8f3a-b98ca8cf2264.png">
 
 # Execution Video
 
