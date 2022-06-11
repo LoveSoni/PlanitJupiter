@@ -16,7 +16,7 @@ This repository contains PlanIt Assessment Automation project which is capable o
 * Log4j2
 * Extent Report
 
-**Browser Supproted** We just need to update the browser name in configuration file and it will automatically install the relevant drivers
+**Browser Supported** We just need to update the browser name in configuration file and it will automatically install the relevant drivers
 * Chrome
 * Firefox
 * Safari
